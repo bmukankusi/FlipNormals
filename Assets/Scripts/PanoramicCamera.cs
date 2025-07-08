@@ -3,7 +3,6 @@ using UnityEngine;
 public class PanoramicCamera : MonoBehaviour
 {
   
-    // Adjust this value to control the sensitivity of the mouse movement
     [SerializeField]
     private float lookSpeed = 2.0f;
 
@@ -13,8 +12,6 @@ public class PanoramicCamera : MonoBehaviour
 
     void Start()
     {
-        // Optional: Lock the cursor to the center of the screen and hide it
-        // This is good for immersive experiences.
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -31,13 +28,12 @@ public class PanoramicCamera : MonoBehaviour
 
         // Apply vertical rotation (pitch) to the X-axis
         // We need to clamp this to prevent the camera from flipping upside down
-        rotationX -= mouseY; // Subtract because moving mouse up should look up (negative pitch)
-        rotationX = Mathf.Clamp(rotationX, -90f, 90f); // Clamp between -90 (straight up) and 90 (straight down)
+        rotationX -= mouseY; 
+        rotationX = Mathf.Clamp(rotationX, -90f, 90f); 
 
-        // Apply the combined rotations
         transform.localEulerAngles = new Vector3(rotationX, rotationY, 0);
 
-        // Optional: Press Esc to unlock cursor
+        // Press Esc to unlock cursor
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Cursor.lockState = CursorLockMode.None;
